@@ -38,26 +38,145 @@ export const constantRouterMap = [
   },
 
   {
+    path: '/',
+    component: Layout,
+    redirect: '/dashboard',
+    name: '控制台',
+    hidden: true,
+    children: [{
+      path: 'dashboard',
+      component: () => import('@/views/dashboard/index')
+    }]
+  },
+
+  {
     path: '/example',
     component: Layout,
     redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'example' },
+    name: '文章管理',
+    meta: { title: '文章管理', icon: 'chart' },
     children: [
       {
-        path: 'table',
+        path: 'article',
+        name: '所有文章',
+        component: () => import('@/views/table/index'),
+        meta: { title: '所有文章', icon: 'documentation' }
+      },
+      {
+        path: 'catagories',
+        name: '分类目录',
+        component: () => import('@/views/tree/index'),
+        meta: { title: '分类目录', icon: 'documentation' }
+      },
+      {
+        path: 'tags',
+        name: '标签',
+        component: () => import('@/views/tree/index'),
+        meta: { title: '标签', icon: 'documentation' }
+      }
+    ]
+  },
+
+  {
+    path: '/media',
+    component: Layout,
+    redirect: '/media/table',
+    name: 'Media',
+    meta: { title: '媒体', icon: 'guide' },
+    children: [
+      {
+        path: 'media',
         name: 'Table',
         component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
+        meta: { title: '媒体库', icon: 'component' }
       },
       {
         path: 'tree',
         name: 'Tree',
         component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
+        meta: { title: '添加', icon: 'tree' }
       }
     ]
   },
+
+  {
+    path: '/example',
+    component: Layout,
+    redirect: '/example/table',
+    name: 'todoList',
+    meta: { title: '任务清单', icon: 'documentation' },
+    children: [
+      {
+        path: 'table',
+        name: 'Table',
+        component: () => import('@/views/table/index'),
+        meta: { title: '所有清单', icon: 'nested' }
+      },
+      {
+        path: 'tree',
+        name: 'Tree',
+        component: () => import('@/views/tree/index'),
+        meta: { title: '任务管理', icon: 'lock' }
+      }
+    ]
+  },
+
+  {
+    path: '/example',
+    component: Layout,
+    redirect: '/example/table',
+    name: 'propertyManager',
+    meta: { title: '账务管理', icon: 'money' },
+    children: [
+      {
+        path: 'table',
+        name: 'Table',
+        component: () => import('@/views/table/index'),
+        meta: { title: '账单管理', icon: 'zip' }
+      },
+      {
+        path: 'tree',
+        name: 'Tree',
+        component: () => import('@/views/tree/index'),
+        meta: { title: '账本导入', icon: 'excel' }
+      }
+    ]
+  },
+
+  // {
+  //   path: '/example',
+  //   component: Layout,
+  //   redirect: '/example/table',
+  //   name: 'Example',
+  //   meta: { title: 'Example', icon: 'example' },
+  //   children: [
+  //     {
+  //       path: 'table',
+  //       name: 'Table',
+  //       component: () => import('@/views/table/index'),
+  //       meta: { title: 'Table', icon: 'table' }
+  //     },
+  //     {
+  //       path: 'tree',
+  //       name: 'Tree',
+  //       component: () => import('@/views/tree/index'),
+  //       meta: { title: 'Tree', icon: 'tree' }
+  //     }
+  //   ]
+  // },
+  //
+  // {
+  //   path: '/form',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       name: 'Form',
+  //       component: () => import('@/views/form/index'),
+  //       meta: { title: 'Form', icon: 'form' }
+  //     }
+  //   ]
+  // },
 
   {
     path: '/form',
@@ -67,10 +186,24 @@ export const constantRouterMap = [
         path: 'index',
         name: 'Form',
         component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
+        meta: { title: '评论管理', icon: 'message' }
       }
     ]
   },
+
+  {
+    path: '/userinfo',
+    component: Layout,
+    children: [
+      {
+        path: 'userinfo',
+        name: 'Userinfo',
+        component: () => import('@/views/userinfo/userinfo'),
+        meta: { title: '用户', icon: 'peoples' }
+      }
+    ]
+  },
+
 
   { path: '*', redirect: '/404', hidden: true }
 ]
