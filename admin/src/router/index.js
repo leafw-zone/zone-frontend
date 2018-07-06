@@ -38,18 +38,6 @@ export const constantRouterMap = [
   },
 
   {
-    path: '/',
-    component: Layout,
-    redirect: '/dashboard',
-    name: '控制台',
-    hidden: true,
-    children: [{
-      path: 'dashboard',
-      component: () => import('@/views/dashboard/index')
-    }]
-  },
-
-  {
     path: '/example',
     component: Layout,
     redirect: '/example/table',
@@ -203,7 +191,6 @@ export const constantRouterMap = [
       }
     ]
   },
-
 
   { path: '*', redirect: '/404', hidden: true }
 ]
