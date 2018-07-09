@@ -180,14 +180,23 @@ export const constantRouterMap = [
   },
 
   {
-    path: '/userinfo',
+    path: '/userManager',
     component: Layout,
+    redirect: '/userManager/user',
+    name: 'userManager',
+    meta: { title: '用户管理', icon: 'peoples' },
     children: [
       {
         path: 'userinfo',
         name: 'Userinfo',
         component: () => import('@/views/userinfo/userinfo'),
         meta: { title: '用户', icon: 'peoples' }
+      },
+      {
+        path: 'userlist',
+        name: 'userlist',
+        component: () => import('@/views/userlist/userlist'),
+        meta: { title: '用户列表', icon: 'peoples' }
       }
     ]
   },
