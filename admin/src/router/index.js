@@ -38,9 +38,9 @@ export const constantRouterMap = [
   },
 
   {
-    path: '/example',
+    path: '/article',
     component: Layout,
-    redirect: '/example/table',
+    redirect: 'noredirect',
     name: '文章管理',
     meta: { title: '文章管理', icon: 'chart' },
     children: [
@@ -49,6 +49,12 @@ export const constantRouterMap = [
         name: '所有文章',
         component: () => import('@/views/table/index'),
         meta: { title: '所有文章', icon: 'documentation' }
+      },
+      {
+        path: 'edit',
+        name: '写文章',
+        component: () => import('@/views/article/edit'),
+        meta: { title: '写文章', icon: 'documentation' }
       },
       {
         path: 'catagories',

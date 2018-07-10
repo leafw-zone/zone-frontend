@@ -16,10 +16,15 @@ import store from './store'
 import '@/icons' // icon
 import '@/permission' // permission control
 
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
+
 Vue.use(ElementUI, {
   size: 'medium', // set element-ui default size
   i18n: (key, value) => i18n.t(key, value)
 })
+
+Vue.use(mavonEditor)
 
 Vue.config.productionTip = false
 
