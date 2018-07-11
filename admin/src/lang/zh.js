@@ -124,10 +124,15 @@ export default {
     userName: '用户名',
     email: '邮箱',
     birthday: '生日',
-    articleId: '文章id',
+    articleId: '文章编号',
     categories: '分类目录',
     tags: '标签',
-    postTime: '发布时间'
+    postTime: '发布时间',
+    createTime: '创建时间',
+    categoryName: '分类目录名称',
+    categoryId: '分类目录编号',
+    tagName: '标签名称',
+    tagId: '标签编号'
   },
   errorLog: {
     tips: '请点击右上角bug小图标',

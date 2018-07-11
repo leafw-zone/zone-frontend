@@ -198,7 +198,7 @@
       handleCurrentChange(val) {
         this.userQueryDto.pageNumber = val
         this.queryUserList(this.userQueryDto)
-      },
+      }
     }
   }
 </script>
