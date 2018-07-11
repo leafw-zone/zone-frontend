@@ -190,15 +190,15 @@
       },
       handleFilter() {
         this.userQueryDto.pageNumber = 1
-        this.queryUserList()
+        this.queryUserList(this.userQueryDto)
       },
       handleSizeChange(val) {
         this.userQueryDto.pageSize = val
-        this.queryUserList()
+        this.queryUserList(this.userQueryDto)
       },
       handleCurrentChange(val) {
         this.userQueryDto.pageNumber = val
-        this.queryUserList()
+        this.queryUserList(this.userQueryDto)
       },
       formatJson(filterVal, jsonData) {
         return jsonData.map(v => filterVal.map(j => {

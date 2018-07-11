@@ -123,7 +123,11 @@ export default {
     userId: '用户编号',
     userName: '用户名',
     email: '邮箱',
-    birthday: '生日'
+    birthday: '生日',
+    articleId: '作者id',
+    categories: '分类目录',
+    tags: '标签',
+    postTime: '发布时间'
   },
   errorLog: {
     tips: '请点击右上角bug小图标',

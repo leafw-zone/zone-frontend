@@ -7,3 +7,11 @@ export function postArticle(articleDto) {
     data: articleDto
   })
 }
+
+export function queryArticleList(articleQueryDto) {
+  return request({
+    url: '/blog/article/queryArticleList',
+    method: 'post',
+    data: articleQueryDto
+  })
+}

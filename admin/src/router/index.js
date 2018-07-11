@@ -45,9 +45,9 @@ export const constantRouterMap = [
     meta: { title: '文章管理', icon: 'chart' },
     children: [
       {
-        path: 'article',
+        path: 'articleList',
         name: '所有文章',
-        component: () => import('@/views/table/index'),
+        component: () => import('@/views/article/articleList'),
         meta: { title: '所有文章', icon: 'documentation' }
       },
       {

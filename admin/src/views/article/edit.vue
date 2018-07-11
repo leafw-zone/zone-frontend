@@ -43,7 +43,7 @@
   import { mavonEditor } from 'mavon-editor'
   import 'mavon-editor/dist/css/index.css'
   import ElFormItem from '../../../node_modules/element-ui/packages/form/src/form-item.vue'
-  import { postArticle } from '@/api/article/edit'
+  import { postArticle } from '@/api/article/article'
 
   const contentMd = `
 * vue
