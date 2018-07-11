@@ -124,7 +124,7 @@ export default {
     userName: '用户名',
     email: '邮箱',
     birthday: '生日',
-    articleId: '作者id',
+    articleId: '文章id',
     categories: '分类目录',
     tags: '标签',
     postTime: '发布时间'

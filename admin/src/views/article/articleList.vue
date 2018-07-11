@@ -6,31 +6,31 @@
       <el-button class="filter-item" type="primary"  icon="el-icon-search" @click="handleFilter">{{$t('table.search')}}</el-button>
     </div>
 
-    <el-table :key='tableKey' :data="list"  border fit highlight-current-row
-              style="width: 100%;min-height:1000px;">
-      <el-table-column align="center" :label="$t('table.articleId')" width="120">
+    <el-table :key='tableKey' :data="list"  border fit highlight-current-row stripe
+              style="width: 100%;min-height:150%; margin-bottom: 1%">
+      <el-table-column align="center" :label="$t('table.articleId')" fit>
         <template slot-scope="scope">
           <span>{{scope.row.articleId}}</span>
         </template>
       </el-table-column>
-      <el-table-column min-width="300" :label="$t('table.title')">
+      <el-table-column min-width="300" :label="$t('table.title')" align="center">
         <template slot-scope="scope">
           <span>{{scope.row.title}}</span>
         </template>
       </el-table-column>
-      <el-table-column width="140px" align="center" :label="$t('table.categories')">
+      <el-table-column fit align="center" :label="$t('table.categories')">
         <template slot-scope="scope">
           <span>{{scope.row.categories}}</span>
         </template>
       </el-table-column>
-      <el-table-column width="140px" align="center" :label="$t('table.tags')">
+      <el-table-column fit align="center" :label="$t('table.tags')">
         <template slot-scope="scope">
           <span>{{scope.row.tags}}</span>
         </template>
       </el-table-column>
-      <el-table-column width="150px" align="center" :label="$t('table.postTime')">
+      <el-table-column width="170px" align="center" :label="$t('table.postTime')">
         <template slot-scope="scope">
-          <span>{{scope.row.postTime | parseTime('{y}-{m}-{d}')}}</span>
+          <span>{{ scope.row.postTime | moment("YYYY-MM-DD HH:mm:ss")}}</span>
         </template>
       </el-table-column>
 
@@ -40,24 +40,11 @@
       <el-pagination background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="articleQueryDto.pageNumber" :page-sizes="[10,20,30, 50]" :page-size="articleQueryDto.pageSize" layout="total, sizes, prev, pager, next, jumper" :total="total">
       </el-pagination>
     </div>
-
-
-    <el-dialog title="Reading statistics" :visible.sync="dialogPvVisible">
-      <el-table :data="pvData" border fit highlight-current-row style="width: 100%">
-        <el-table-column prop="key" label="Channel"> </el-table-column>
-        <el-table-column prop="pv" label="Pv"> </el-table-column>
-      </el-table>
-      <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="dialogPvVisible = false">{{$t('table.confirm')}}</el-button>
-      </span>
-    </el-dialog>
-
   </div>
 </template>
 
 <script>
   import { queryArticleList } from '@/api/article/article'
-  import { parseTime } from '@/utils'
 
   export default {
     name: 'complexTable',
@@ -95,7 +82,7 @@
         this.listLoading = true
         queryArticleList(this.articleQueryDto).then(response => {
           this.list = response.data.list
-          this.total = response.data.totalPage
+          this.total = response.data.list.length
 
           // Just to simulate the time of the request
           setTimeout(() => {
@@ -114,15 +101,6 @@
       handleCurrentChange(val) {
         this.articleQueryDto.pageNumber = val
         this.queryArticleList(this.articleQueryDto)
-      },
-      formatJson(filterVal, jsonData) {
-        return jsonData.map(v => filterVal.map(j => {
-          if (j === 'timestamp') {
-            return parseTime(v[j])
-          } else {
-            return v[j]
-          }
-        }))
       }
     }
   }

@@ -18,6 +18,7 @@ import '@/permission' // permission control
 
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
+import moment from 'vue-moment'
 
 Vue.use(ElementUI, {
   size: 'medium', // set element-ui default size
@@ -25,6 +26,8 @@ Vue.use(ElementUI, {
 })
 
 Vue.use(mavonEditor)
+
+Vue.use(moment)
 
 Vue.config.productionTip = false
 

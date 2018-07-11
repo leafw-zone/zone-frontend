@@ -18,7 +18,7 @@
     </div>
 
     <el-table :key='tableKey' :data="list"  border fit highlight-current-row
-              style="width: 100%;min-height:1000px;">
+              style="width: 100%;min-height:150%; margin-bottom: 1%">
       <el-table-column align="center" :label="$t('table.userId')" width="120">
         <template slot-scope="scope">
           <span>{{scope.row.userId}}</span>
@@ -36,7 +36,7 @@
       </el-table-column>
       <el-table-column width="150px" align="center" :label="$t('table.date')">
         <template slot-scope="scope">
-          <span>{{scope.row.birthday | parseTime('{y}-{m}-{d}')}}</span>
+          <span>{{scope.row.birthday | moment("YYYY-MM-DD HH:mm:ss")}}</span>
         </template>
       </el-table-column>
 
@@ -109,22 +109,21 @@
       <!--</div>-->
     <!--</el-dialog>-->
 
-    <el-dialog title="Reading statistics" :visible.sync="dialogPvVisible">
-      <el-table :data="pvData" border fit highlight-current-row style="width: 100%">
-        <el-table-column prop="key" label="Channel"> </el-table-column>
-        <el-table-column prop="pv" label="Pv"> </el-table-column>
-      </el-table>
-      <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="dialogPvVisible = false">{{$t('table.confirm')}}</el-button>
-      </span>
-    </el-dialog>
+    <!--<el-dialog title="Reading statistics" :visible.sync="dialogPvVisible">-->
+      <!--<el-table :data="pvData" border fit highlight-current-row style="width: 100%">-->
+        <!--<el-table-column prop="key" label="Channel"> </el-table-column>-->
+        <!--<el-table-column prop="pv" label="Pv"> </el-table-column>-->
+      <!--</el-table>-->
+      <!--<span slot="footer" class="dialog-footer">-->
+        <!--<el-button type="primary" @click="dialogPvVisible = false">{{$t('table.confirm')}}</el-button>-->
+      <!--</span>-->
+    <!--</el-dialog>-->
 
   </div>
 </template>
 
 <script>
   import { queryUserList } from '@/api/userlist'
-  import { parseTime } from '@/utils'
 
   export default {
     name: 'complexTable',
@@ -200,15 +199,6 @@
         this.userQueryDto.pageNumber = val
         this.queryUserList(this.userQueryDto)
       },
-      formatJson(filterVal, jsonData) {
-        return jsonData.map(v => filterVal.map(j => {
-          if (j === 'timestamp') {
-            return parseTime(v[j])
-          } else {
-            return v[j]
-          }
-        }))
-      }
     }
   }
 </script>
