@@ -4,6 +4,8 @@
       <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" :placeholder="$t('table.categoryName')" v-model="categoryQueryDto.categoryName">
       </el-input>
       <el-button class="filter-item" type="primary"  icon="el-icon-search" @click="handleFilter">{{$t('table.search')}}</el-button>
+      <el-button class="filter-item" type="primary"  icon="el-icon-search" @click="dialogFormVisible = true">新增</el-button>
+
     </div>
 
     <el-table :key='tableKey' :data="list"  border fit highlight-current-row stripe
@@ -25,11 +27,25 @@
       </el-table-column>
 
     </el-table>
+
+    <el-dialog title="新增分类目录" :visible.sync="dialogFormVisible">
+      <el-form :model="categoryDto">
+        <el-form-item label="分类名称" >
+          <el-input v-model="categoryDto.categoryName" auto-complete="off"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="saveCategory">确 定</el-button>
+      </div>
+    </el-dialog>
+
+
   </div>
 </template>
 
 <script>
-  import { queryCategoryList } from '@/api/article/category'
+  import { queryCategoryList, saveCategory } from '@/api/article/category'
 
   export default {
     name: 'complexTable',
@@ -40,6 +56,9 @@
         total: null,
         listLoading: true,
         categoryQueryDto: {},
+        categoryDto: {
+          categoryName: ''
+        },
         categoryId: '',
         categoryName: '',
         createTime: '',
@@ -48,10 +67,7 @@
         textMap: {
           update: 'Edit',
           create: 'Create'
-        },
-        dialogPvVisible: false,
-        pvData: [],
-        downloadLoading: false
+        }
       }
     },
     created() {
@@ -67,6 +83,18 @@
           setTimeout(() => {
             this.listLoading = false
           }, 1.5 * 1000)
+        })
+      },
+      saveCategory() {
+        this.listLoading = true
+        saveCategory(this.categoryDto).then(response => {
+          this.$message('success')
+          // Just to simulate the time of the request
+          setTimeout(() => {
+            this.listLoading = false
+          }, 1.5 * 1000)
+          this.dialogFormVisible = false
+          this.queryCategoryList()
         })
       },
       handleFilter() {

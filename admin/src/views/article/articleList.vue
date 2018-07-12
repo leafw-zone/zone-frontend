@@ -1,34 +1,56 @@
 <template>
   <div class="app-container">
-    <div class="filter-container">
+    <div class="filter-container" style="margin-bottom: 1%; margin-top: 2%">
       <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" :placeholder="$t('table.title')" v-model="articleQueryDto.title">
       </el-input>
+      <el-select v-model="articleQueryDto.categories"  placeholder="分类目录">
+        <el-option
+          v-for="item in optionsA"
+          :key="item.categoryId"
+          :label="item.categoryName"
+          :value="item.categoryId">
+        </el-option>
+      </el-select>
+      <el-select v-model="articleQueryDto.tags"  placeholder="标签">
+        <el-option
+          v-for="item in optionsA"
+          :key="item.categoryId"
+          :label="item.categoryName"
+          :value="item.categoryId">
+        </el-option>
+      </el-select>
       <el-button class="filter-item" type="primary"  icon="el-icon-search" @click="handleFilter">{{$t('table.search')}}</el-button>
+      <el-button class="filter-item" type="primary"  icon="el-icon-search" @click="handleEdit">编辑</el-button>
+      <el-button class="filter-item" type="primary"  icon="el-icon-search" @click="handleFilter">删除</el-button>
+
+
     </div>
 
-    <el-table :key='tableKey' :data="list"  border fit highlight-current-row stripe
-              style="width: 100%;min-height:150%; margin-bottom: 1%">
-      <el-table-column align="center" :label="$t('table.articleId')" fit>
+    <el-table :key='tableKey' :data="list"  border  highlight-current-row stripe ref="multipleTable" fit
+              style="width: 100%;min-height:150%; margin-bottom: 1%" @selection-change="handleSelectionChange" >
+      <el-table-column type="selection" width="50">
+      </el-table-column>
+      <el-table-column align="center" :label="$t('table.articleId')" fit >
         <template slot-scope="scope">
           <span>{{scope.row.articleId}}</span>
         </template>
       </el-table-column>
-      <el-table-column min-width="300" :label="$t('table.title')" align="center">
+      <el-table-column  :label="$t('table.title')" align="center" fit>
         <template slot-scope="scope">
           <span>{{scope.row.title}}</span>
         </template>
       </el-table-column>
-      <el-table-column fit align="center" :label="$t('table.categories')">
+      <el-table-column  align="center" :label="$t('table.categories')" fit>
         <template slot-scope="scope">
-          <span>{{scope.row.categories}}</span>
+          <span>{{scope.row.categoriesName}}</span>
         </template>
       </el-table-column>
-      <el-table-column fit align="center" :label="$t('table.tags')">
+      <el-table-column  align="center" :label="$t('table.tags')" fit>
         <template slot-scope="scope">
-          <span>{{scope.row.tags}}</span>
+          <span>{{scope.row.tagsName}}</span>
         </template>
       </el-table-column>
-      <el-table-column width="170px" align="center" :label="$t('table.postTime')">
+      <el-table-column width="170px" align="center" :label="$t('table.postTime')" fit>
         <template slot-scope="scope">
           <span>{{ scope.row.postTime | moment("YYYY-MM-DD HH:mm:ss")}}</span>
         </template>
@@ -45,6 +67,8 @@
 
 <script>
   import { queryArticleList } from '@/api/article/article'
+  import { queryCategoryList } from '@/api/article/category'
+  import { queryTagList } from '@/api/article/tag'
 
   export default {
     name: 'complexTable',
@@ -58,6 +82,8 @@
           pageNumber: 1,
           pageSize: 20
         },
+        optionsA: [],
+        optionsB: [],
         articleId: '',
         title: '',
         categories: '',
@@ -71,11 +97,16 @@
         },
         dialogPvVisible: false,
         pvData: [],
-        downloadLoading: false
+        downloadLoading: false,
+        articleDto: {}
       }
     },
     created() {
       this.queryArticleList()
+    },
+    mounted: function() {
+      this.queryCategoryList()
+      this.queryTagList()
     },
     methods: {
       queryArticleList() {
@@ -94,6 +125,19 @@
         this.articleQueryDto.pageNumber = 1
         this.queryArticleList(this.articleQueryDto)
       },
+      handleEdit() {
+        const articleDto = this.articleDto
+        console.log(articleDto[0])
+        this.$router.push({
+          path: '/article/edit',
+          name: 'edit',
+          component: () => import('@/views/article/edit'),
+          redirect: 'noredirect',
+          params: {
+            articleDto: articleDto[0]
+          }
+        })
+      },
       handleSizeChange(val) {
         this.articleQueryDto.pageSize = val
         this.queryArticleList(this.articleQueryDto)
@@ -101,6 +145,21 @@
       handleCurrentChange(val) {
         this.articleQueryDto.pageNumber = val
         this.queryArticleList(this.articleQueryDto)
+      },
+      handleSelectionChange(val) {
+        this.articleDto = val
+      },
+      queryCategoryList() {
+        const categoryQueryDto = {}
+        queryCategoryList(categoryQueryDto).then(response => {
+          this.optionsA = response.data
+        })
+      },
+      queryTagList() {
+        const tagQueryDto = {}
+        queryTagList(tagQueryDto).then(response => {
+          this.optionsB = response.data
+        })
       }
     }
   }

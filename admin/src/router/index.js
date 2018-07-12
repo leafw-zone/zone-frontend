@@ -46,13 +46,13 @@ export const constantRouterMap = [
     children: [
       {
         path: 'articleList',
-        name: '所有文章',
+        name: 'articleList',
         component: () => import('@/views/article/articleList'),
         meta: { title: '所有文章', icon: 'documentation' }
       },
       {
         path: 'edit',
-        name: '写文章',
+        name: 'edit',
         component: () => import('@/views/article/edit'),
         meta: { title: '写文章', icon: 'documentation' }
       },

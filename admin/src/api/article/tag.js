@@ -7,3 +7,11 @@ export function queryTagList(tagQueryDto) {
     data: tagQueryDto
   })
 }
+
+export function saveTag(tagDto) {
+  return request({
+    url: '/blog/tag/saveTag',
+    method: 'post',
+    data: tagDto
+  })
+}
