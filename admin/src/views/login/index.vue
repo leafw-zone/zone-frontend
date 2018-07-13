@@ -31,6 +31,8 @@
 
 <script>
 import { isvalidUsername } from '@/utils/validate'
+import { getTokenStr } from '@/api/token'
+import { setToken } from '@/utils/auth'
 
 export default {
   name: 'login',
@@ -70,7 +72,17 @@ export default {
         this.pwdType = 'password'
       }
     },
+    getTokenStr() {
+      getTokenStr().then(response => {
+        const token = response.data
+        setToken(token)
+        console.log(token)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
     handleLogin() {
+      this.getTokenStr()
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
