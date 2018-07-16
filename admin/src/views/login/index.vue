@@ -72,31 +72,32 @@ export default {
         this.pwdType = 'password'
       }
     },
+    // 调用登陆方法前先获取token并保存
     getTokenStr() {
       getTokenStr().then(response => {
         const token = response.data
         setToken(token)
         console.log(token)
+        this.$refs.loginForm.validate(valid => {
+          if (valid) {
+            this.loading = true
+            this.$store.dispatch('Login', this.loginForm).then(() => {
+              this.loading = false
+              this.$router.push({ path: '/' })
+            }).catch(() => {
+              this.loading = false
+            })
+          } else {
+            console.log('error submit!!')
+            return false
+          }
+        })
       }).catch(error => {
         console.log(error)
       })
     },
     handleLogin() {
       this.getTokenStr()
-      this.$refs.loginForm.validate(valid => {
-        if (valid) {
-          this.loading = true
-          this.$store.dispatch('Login', this.loginForm).then(() => {
-            this.loading = false
-            this.$router.push({ path: '/' })
-          }).catch(() => {
-            this.loading = false
-          })
-        } else {
-          console.log('error submit!!')
-          return false
-        }
-      })
     }
   }
 }

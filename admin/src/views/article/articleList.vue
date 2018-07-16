@@ -3,7 +3,7 @@
     <div class="filter-container" style="margin-bottom: 1%; margin-top: 2%">
       <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" :placeholder="$t('table.title')" v-model="articleQueryDto.title">
       </el-input>
-      <el-select v-model="articleQueryDto.categories"  placeholder="分类目录">
+      <el-select v-model="articleQueryDto.categories" clearable placeholder="分类目录">
         <el-option
           v-for="item in optionsA"
           :key="item.categoryId"
@@ -11,12 +11,12 @@
           :value="item.categoryId">
         </el-option>
       </el-select>
-      <el-select v-model="articleQueryDto.tags"  placeholder="标签">
+      <el-select v-model="articleQueryDto.tags" clearable placeholder="标签">
         <el-option
-          v-for="item in optionsA"
-          :key="item.categoryId"
-          :label="item.categoryName"
-          :value="item.categoryId">
+          v-for="item in optionsB"
+          :key="item.tagId"
+          :label="item.tagName"
+          :value="item.tagId">
         </el-option>
       </el-select>
       <el-button class="filter-item" type="primary"  icon="el-icon-search" @click="handleFilter">{{$t('table.search')}}</el-button>
@@ -26,31 +26,31 @@
 
     </div>
 
-    <el-table :key='tableKey' :data="list"  border  highlight-current-row stripe ref="multipleTable" fit
-              style="width: 100%;min-height:150%; margin-bottom: 1%" @selection-change="handleSelectionChange" >
-      <el-table-column type="selection" width="50">
+    <el-table :key='tableKey' :data="list"  border  highlight-current-row stripe ref="multipleTable"
+              style="width: 100%;min-height:150%" @selection-change="handleSelectionChange" >
+      <el-table-column type="selection" >
       </el-table-column>
-      <el-table-column align="center" :label="$t('table.articleId')" fit >
+      <el-table-column align="center" :label="$t('table.articleId')"  >
         <template slot-scope="scope">
           <span>{{scope.row.articleId}}</span>
         </template>
       </el-table-column>
-      <el-table-column  :label="$t('table.title')" align="center" fit>
+      <el-table-column  :label="$t('table.title')" align="center" >
         <template slot-scope="scope">
           <span>{{scope.row.title}}</span>
         </template>
       </el-table-column>
-      <el-table-column  align="center" :label="$t('table.categories')" fit>
+      <el-table-column  align="center" :label="$t('table.categories')" >
         <template slot-scope="scope">
           <span>{{scope.row.categoriesName}}</span>
         </template>
       </el-table-column>
-      <el-table-column  align="center" :label="$t('table.tags')" fit>
+      <el-table-column  align="center" :label="$t('table.tags')" >
         <template slot-scope="scope">
           <span>{{scope.row.tagsName}}</span>
         </template>
       </el-table-column>
-      <el-table-column width="170px" align="center" :label="$t('table.postTime')" fit>
+      <el-table-column  align="center" :label="$t('table.postTime')" >
         <template slot-scope="scope">
           <span>{{ scope.row.postTime | moment("YYYY-MM-DD HH:mm:ss")}}</span>
         </template>
