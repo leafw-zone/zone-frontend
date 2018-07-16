@@ -17,7 +17,7 @@
           <span @click="logout" style="display:block;">LogOut</span>
         </el-dropdown-item>
         <el-dropdown-item divided>
-          <span @click="logout" style="display:block;">切换系统</span>
+          <span @click="test" style="display:block;">切换系统</span>
         </el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
@@ -48,6 +48,9 @@ export default {
       this.$store.dispatch('LogOut').then(() => {
         location.reload() // 为了重新实例化vue-router对象 避免bug
       })
+    },
+    test() {
+      this.$router.push({ path: '/blog' })
     }
   }
 }
