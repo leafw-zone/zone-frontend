@@ -20,6 +20,8 @@
           <el-dropdown-item>Python</el-dropdown-item>
         </el-dropdown-menu>
         &nbsp;&nbsp;&nbsp;
+        <a @click="goBackend" style="font-size: 120%">backend</a>
+        &nbsp;&nbsp;&nbsp;
         <a @click="goPage1" style="font-size: 120%">page</a>
         &nbsp;&nbsp;&nbsp;
         <a @click="goHome" style="font-size: 120%">goHome</a>
@@ -49,6 +51,9 @@
       },
       goHome() {
         this.$router.push('/home')
+      },
+      goBackend() {
+        window.location = 'http://localhost:9528/#/'
       }
     }
   }

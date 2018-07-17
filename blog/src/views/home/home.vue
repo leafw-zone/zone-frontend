@@ -1,5 +1,9 @@
 <template>
   <div class="app-container">
+    <div style="width: 1080px;height: 25px">
+      <img src='@/assets/header-line.png' style="width: 100%;height: 100%"/>
+    </div>
+
     <div class="articleContent">
       <div id="articles">
         <div class="tags animated fadeIn">
@@ -17,7 +21,7 @@
           <h2>{{article.title}}</h2>
           <time><i class="iconfont icon-shijian"></i>{{article.postTime | moment("YYYY-MM-DD HH:mm:ss")}}</time>
           <span class="articleTag"><i class="iconfont icon-label"></i>{{article.tagsName}}</span>
-          <p>{{article.contentMd}}</p>
+          <p>{{article.summary}}</p>
           <!--<router-link :to="{name: 'article', params: {id: article.id, index: index, page: pageNumber}, hash: '#article'}" tag="button" exact>-->
             <!--<span>Continue reading</span>-->
           <!--</router-link>-->
@@ -61,6 +65,7 @@
         categories: '',
         tags: '',
         postTime: '',
+        summary: '',
         dialogFormVisible: false,
         dialogStatus: '',
         textMap: {
