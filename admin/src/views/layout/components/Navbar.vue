@@ -50,7 +50,7 @@ export default {
       })
     },
     test() {
-      this.$router.push({ path: '/blog' })
+      window.location = 'http://localhost:8080'
     }
   }
 }

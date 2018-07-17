@@ -1,26 +1,25 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li>
-        <a
-          href="https://vuejs.org"
-          target="_blank"
-        >
-          Core Docs
-        </a>
-      </li>
-    </ul>
+    <h2>token:{{token}}</h2>
   </div>
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
+  import { getToken } from '@/utils/auth'
+
   export default {
     name: 'page1',
+    computed: {
+      ...mapGetters([
+        'name'
+      ])
+    },
     data() {
       return {
-        msg: 'Page 1'
+        msg: 'Page 1',
+        token: getToken()
       }
     }
   }
