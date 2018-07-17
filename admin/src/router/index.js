@@ -8,7 +8,6 @@ Vue.use(Router)
 
 /* Layout */
 import Layout from '../views/layout/Layout'
-import BlogLayout from '../views/blog/layout/BlogLayout'
 
 /**
 * hidden: true                   if `hidden:true` will not show in the sidebar(default is false)
@@ -22,16 +21,10 @@ import BlogLayout from '../views/blog/layout/BlogLayout'
     icon: 'svg-name'             the icon show in the sidebar,
   }
 **/
-export const blogRouterMap = [
-  { path: '/blog', component: BlogLayout },
-  { path: '/test', component: () => import('@/views/blog/test/test') }
-]
 
 export const constantRouterMap = [
   { path: '/login', component: () => import('@/views/login/index'), hidden: true },
   { path: '/404', component: () => import('@/views/404'), hidden: true },
-  { path: '/blog', component: BlogLayout },
-  { path: '/test', component: () => import('@/views/blog/test/test') },
 
   {
     path: '/',
@@ -185,7 +178,6 @@ export const constantRouterMap = [
 export default new Router({
   // mode: 'history', //后端支持可开
   scrollBehavior: () => ({ y: 0 }),
-  routes: constantRouterMap,
-  routersNew: blogRouterMap
+  routes: constantRouterMap
 })
 
