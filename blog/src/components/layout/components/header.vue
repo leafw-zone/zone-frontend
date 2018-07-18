@@ -4,7 +4,7 @@
         <!--<a href="" style="font-size: 200%;color: #808080;margin-left: -30px">leafw</a>-->
           <span style="font-size: 120%;margin-left: 500px">categories</span>
           <el-dropdown-menu slot="dropdown" style="margin-left: 1000px">
-            <el-dropdown-item v-for="category in categories">
+            <el-dropdown-item v-for="(category,key) in categories" :value="key" :key="category.categoryName">
               <span>{{ category.categoryName }}</span>
             </el-dropdown-item>
           </el-dropdown-menu>
