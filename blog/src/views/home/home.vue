@@ -22,6 +22,7 @@
           <time><i class="iconfont icon-shijian"></i>{{article.postTime | moment("YYYY-MM-DD HH:mm:ss")}}</time>
           <span class="articleTag"><i class="iconfont icon-label"></i>{{article.tagsName}}</span>
           <p>{{article.summary}}</p>
+          <a @click="readArticle(index)">Continue reading</a>
           <!--<router-link :to="{name: 'article', params: {id: article.id, index: index, page: pageNumber}, hash: '#article'}" tag="button" exact>-->
             <!--<span>Continue reading</span>-->
           <!--</router-link>-->
@@ -60,12 +61,14 @@
         },
         optionsA: [],
         optionsB: [],
-        articleId: '',
-        title: '',
-        categories: '',
-        tags: '',
-        postTime: '',
-        summary: '',
+        article: {
+          articleId: '',
+          title: '',
+          categories: '',
+          tags: '',
+          postTime: '',
+          summary: ''
+        },
         dialogFormVisible: false,
         dialogStatus: '',
         textMap: {
@@ -123,6 +126,19 @@
         const tagQueryDto = {}
         queryTagList(tagQueryDto).then(response => {
           this.optionsB = response.data
+        })
+      },
+      readArticle(index) {
+        const articleDto = this.list[index]
+        console.log(articleDto)
+        this.$router.push({
+          path: '/article',
+          name: 'article',
+          component: () => import('@/views/article/article'),
+          redirect: 'noredirect',
+          params: {
+            articleDto: articleDto
+          }
         })
       }
     }

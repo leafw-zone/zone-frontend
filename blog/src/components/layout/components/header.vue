@@ -1,5 +1,5 @@
 <template>
-    <el-header style="margin-top: 5%;">
+    <el-header style="margin-top: 3%;">
       <el-dropdown >
         <!--<a href="" style="font-size: 200%;color: #808080;margin-left: -30px">leafw</a>-->
           <span style="font-size: 120%;margin-left: 500px">categories</span>

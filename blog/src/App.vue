@@ -4,7 +4,7 @@
       <el-header>
       <headerBar></headerBar>
       </el-header>
-      <el-main style="margin-top: 5%">
+      <el-main style="margin-top: 2%;margin-left: 8%">
         <router-view/>
       </el-main>
     </el-container>
@@ -31,7 +31,7 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  /*text-align: center;*/
   color: #2c3e50;
   margin-top: 60px;
 }

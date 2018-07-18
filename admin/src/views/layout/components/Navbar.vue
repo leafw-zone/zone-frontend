@@ -17,7 +17,7 @@
           <span @click="logout" style="display:block;">LogOut</span>
         </el-dropdown-item>
         <el-dropdown-item divided>
-          <span @click="test" style="display:block;">切换系统</span>
+          <span @click="test" style="display:block;">Blog</span>
         </el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
