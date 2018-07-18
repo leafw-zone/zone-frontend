@@ -1,6 +1,6 @@
 <template>
-  <div class="wrapper" id="article" style="margin-left: 90px;margin-right:200px;">
-    <div id="content">
+  <div class="wrapper" id="article" >
+    <div id="content" style="margin-left: 90px;margin-right:200px;">
       <h1 class="title animated fadeIn" style="text-align: center">{{article.title}}</h1>
       <div class="appendInfo animated fadeIn" style="text-align: center">
         <time>
@@ -8,7 +8,7 @@
         </time>
         <span>
           <i class="iconfont icon-label"></i>
-          {{article.tags}}
+          {{article.tagsName}}
         </span>
       </div>
       <div class="content animated fadeIn"  v-html="article.contentHtml"></div>
@@ -24,10 +24,13 @@
         <img src="http://www.leafw.cn/wp-content/themes/Siren-master/images/sns/qzone.png" style="width: 20px;padding-top: 5px"/>
         &nbsp;
         <img src="http://www.leafw.cn/wp-content/themes/Siren-master/images/sns/sina.png" style="width: 20px;padding-top: 5px"/>
-
       </div>
-
     </div>
+      <div id="backTop" v-show="topShow">
+        <a v-on:click="scrollTop">
+          <img class="topIcon" src="../../assets/gotop.png"/>
+        </a>
+      </div>
   </div>
 </template>
 
@@ -40,14 +43,18 @@ export default {
       article: {
         title: '',
         postTime: '',
-        tags: '',
+        tagsName: '',
         comment: '',
         contentHtml: ''
-      }
+      },
+      topShow: false
     }
   },
   created: function() {
     this.initData()
+  },
+  mounted: function() {
+    window.addEventListener('scroll', this.handleScroll)
   },
   methods: {
     initData() {
@@ -56,6 +63,18 @@ export default {
         return
       }
       this.article = articleParam
+    },
+    scrollTop() {
+      window.scroll({ top: 0, left: 0, behavior: 'smooth' })
+    },
+    handleScroll() {
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+      var offsetTop = document.querySelector('#backTop').offsetTop
+      if (scrollTop > offsetTop) {
+        this.topShow = true
+      } else {
+        this.topShow = false
+      }
     }
   }
 }
@@ -94,5 +113,13 @@ export default {
   }
   .splitLine {
     color: #DDDDDD
+  }
+  .topIcon {
+    position:fixed;
+    left:94%;
+    top:85%;
+    z-index: 99999;
+    width: 55px;
+    height: 60px;
   }
 </style>

@@ -1,8 +1,5 @@
 <template>
   <div class="app-container">
-    <div style="width: 1080px;height: 25px">
-      <img src='@/assets/header-line.png' style="width: 100%;height: 100%"/>
-    </div>
 
     <div class="articleContent">
       <div id="articles">
