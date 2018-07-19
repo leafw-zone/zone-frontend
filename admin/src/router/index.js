@@ -130,6 +130,12 @@ export const constantRouterMap = [
         meta: { title: '账单历史', icon: 'zip' }
       },
       {
+        path: 'summary',
+        name: 'summary',
+        component: () => import('@/views/accounting/summary'),
+        meta: { title: '账单分析', icon: 'excel' }
+      },
+      {
         path: 'tree',
         name: 'Tree',
         component: () => import('@/views/tree/index'),

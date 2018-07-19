@@ -15,6 +15,7 @@ import store from './store'
 
 import '@/icons' // icon
 import '@/permission' // permission control
+import echarts from 'echarts'
 
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
@@ -30,6 +31,8 @@ Vue.use(mavonEditor)
 Vue.use(moment)
 
 Vue.config.productionTip = false
+
+Vue.prototype.$echarts = echarts
 
 new Vue({
   el: '#app',
