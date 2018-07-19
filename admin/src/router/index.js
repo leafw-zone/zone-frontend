@@ -117,17 +117,17 @@ export const constantRouterMap = [
   },
 
   {
-    path: '/example',
+    path: '/account',
     component: Layout,
-    redirect: '/example/table',
-    name: 'propertyManager',
+    redirect: 'noredirect',
+    name: 'account',
     meta: { title: '账务管理', icon: 'money' },
     children: [
       {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: '账单管理', icon: 'zip' }
+        path: 'accountlog',
+        name: 'accountlog',
+        component: () => import('@/views/accounting/accountLog'),
+        meta: { title: '账单历史', icon: 'zip' }
       },
       {
         path: 'tree',

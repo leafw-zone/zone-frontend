@@ -132,7 +132,12 @@ export default {
     categoryName: '分类目录名称',
     categoryId: '分类目录编号',
     tagName: '标签名称',
-    tagId: '标签编号'
+    tagId: '标签编号',
+    accountName: '账户名称',
+    changeType: '变化类型',
+    changeAmount: '消费金额',
+    changeTime: '消费日期',
+    consumeType: '消费类型'
   },
   errorLog: {
     tips: '请点击右上角bug小图标',
