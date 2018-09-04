@@ -1,5 +1,5 @@
 <template>
-  <div id="myChart" :style="{width: '300px', height: '300px'}">
+  <div id="myChart" >
   </div>
 
 </template>
@@ -26,7 +26,8 @@
         option: {
           title: {
             text: '月度账单统计',
-            x: 'center'
+            top: 40,
+            left: 250
           },
           tooltip: {
             trigger: 'item',
@@ -35,8 +36,8 @@
           legend: {
             type: 'scroll',
             orient: 'vertical',
-            right: 10,
-            top: 20,
+            right: 180,
+            top: 80,
             bottom: 20,
             data: [],
             selected: {}
@@ -110,3 +111,11 @@
   }
 
 </script>
+<style>
+  #myChart {
+    width: 800px;
+    height: 600px;
+    margin-left: 100px;
+  }
+
+</style>
