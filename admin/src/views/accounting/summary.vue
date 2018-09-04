@@ -5,6 +5,8 @@
 </template>
 
 <script>
+  import { sumAccountLog } from '@/api/account/accountLog'
+
   // 引入基本模板
   const echarts = require('echarts/lib/echarts')
   // 引入柱状图组件
@@ -17,11 +19,50 @@
     name: 'hello',
     data() {
       return {
-        msg: 'Welcome to Your Vue.js App'
+        msg: 'Welcome to Your Vue.js App',
+        accountLogQueryDto: {},
+        seriesData: [],
+        listLoading: true,
+        option: {
+          title: {
+            text: '月度账单统计',
+            x: 'center'
+          },
+          tooltip: {
+            trigger: 'item',
+            formatter: '{a} <br/>{b} : {c} ({d}%)'
+          },
+          legend: {
+            type: 'scroll',
+            orient: 'vertical',
+            right: 10,
+            top: 20,
+            bottom: 20,
+            data: [],
+            selected: {}
+          },
+          series: [
+            {
+              name: '消费',
+              type: 'pie',
+              radius: '55%',
+              center: ['40%', '50%'],
+              data: this.seriesData,
+              itemStyle: {
+                emphasis: {
+                  shadowBlur: 10,
+                  shadowOffsetX: 0,
+                  shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+              }
+            }
+          ]
+
+        }
       }
     },
     mounted() {
-      this.drawLine()
+      this.queryPieData()
     },
     methods: {
       drawLine() {
@@ -41,8 +82,31 @@
             data: [5, 20, 36, 10, 10, 20]
           }]
         })
+      },
+      drawPie() {
+        const myChart = echarts.init(document.getElementById('myChart'), 'light')
+        myChart.setOption(this.option, true)
+      },
+      queryPieData() {
+        sumAccountLog(this.accountLogQueryDto).then(response => {
+          console.log(response.data)
+          var data = response.data
+          for (let i = 0; i < data.length; i++) {
+            this.option.legend.data.push(data[i].consumeTypeName)
+            var seriesData = { 'name': data[i].consumeTypeName, 'value': data[i].sumAmount }
+            this.seriesData.push(seriesData)
+          }
+          this.option.series[0].data = this.seriesData
+          const myChart = echarts.init(document.getElementById('myChart'), 'light')
+          myChart.setOption(this.option, true)
+          console.log(this.option)
+          setTimeout(() => {
+            this.listLoading = false
+          }, 1.5 * 1000)
+        })
       }
     }
+
   }
 
 </script>

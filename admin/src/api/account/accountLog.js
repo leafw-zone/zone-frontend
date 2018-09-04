@@ -15,3 +15,11 @@ export function queryAccountLogList(accountLogQueryDto) {
     data: accountLogQueryDto
   })
 }
+
+export function sumAccountLog(accountLogQueryDto) {
+  return request({
+    url: '/ams/accountLog/sumAccountLog',
+    method: 'post',
+    data: accountLogQueryDto
+  })
+}
