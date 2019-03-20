@@ -70,6 +70,8 @@ service.interceptors.response.use(
           location.reload()// 为了重新实例化vue-router对象 避免bug
         })
       })
+    } else if (error.response.status === 501) {
+      MessageBox.alert('用户名或密码错误！')
     } else {
       console.log('err' + error)// for debug
       Message({
